@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cqtnbyih00h8v"]
+
+[ext_resource type="PackedScene" uid="uid://c7fkggvop7r03" path="res://assets/models/donut/Meshy_AI_a_flying_donut_with_s_0208170619_texture.glb" id="1_rqnho"]
+
+[node name="Donut" type="Node3D"]
+
+[node name="Meshy_AI_a_flying_donut_with_s_0208170619_texture" parent="." instance=ExtResource("1_rqnho")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
