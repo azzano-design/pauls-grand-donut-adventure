@@ -23,9 +23,18 @@ Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
 
 [dialogic]
 
-directories/dch_directory={}
-directories/dtl_directory={}
-layout/style_directory={}
+directories/dch_directory={
+"paul": "res://characters/paul.dch"
+}
+directories/dtl_directory={
+"intro": "res://timelines/intro.dtl"
+}
+layout/style_directory={
+"": "res://styles/text-style.tres",
+"text-style": "res://styles/text-style.tres"
+}
+layout/style_list=["res://styles/text-style.tres"]
+layout/default_style="res://styles/text-style.tres"
 
 [display]
 
