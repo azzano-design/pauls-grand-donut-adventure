@@ -1,0 +1,76 @@
+[gd_scene load_steps=7 format=3 uid="uid://dfuc705es7414"]
+
+[ext_resource type="Script" uid="uid://dcxon0lr2r7k0" path="res://scripts/main_screen.gd" id="1_7a4el"]
+[ext_resource type="Texture2D" uid="uid://dhgfpfpxay46s" path="res://assets/art/gpt_background.png" id="1_tjn2e"]
+[ext_resource type="AudioStream" uid="uid://dkksnyaoh7tn" path="res://assets/music/musicGPT_Donut_Dash.mp3" id="2_ywh4s"]
+[ext_resource type="Script" uid="uid://c6va6n2esjqu7" path="res://scripts/main_background_image.gd" id="3_4sclt"]
+[ext_resource type="Texture2D" uid="uid://dslra48jeymwg" path="res://assets/art/gpt_logo.png" id="3_kwhh3"]
+[ext_resource type="Script" uid="uid://cfra16yxv8fdn" path="res://scripts/main_screen_button.gd" id="4_kwhh3"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+script = ExtResource("1_7a4el")
+metadata/_edit_use_anchors_ = true
+
+[node name="IntroMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_ywh4s")
+autoplay = true
+
+[node name="BackgroundImage" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -192.0
+offset_top = -188.0
+offset_right = 192.0
+offset_bottom = 188.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(1689, 854)
+texture = ExtResource("1_tjn2e")
+stretch_mode = 4
+script = ExtResource("3_4sclt")
+dim_color = Color(0.140448, 0.140447, 0.140447, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -246.0
+offset_bottom = 246.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/VBoxContainer/AspectRatioContainer"]
+custom_minimum_size = Vector2(450, 450)
+layout_mode = 2
+texture = ExtResource("3_kwhh3")
+expand_mode = 1
+
+[node name="Button" type="Button" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+text = "Start
+"
+icon_alignment = 1
+script = ExtResource("4_kwhh3")
+
+[node name="TextEdit" type="TextEdit" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "[Spacebar to activate Donut]"
