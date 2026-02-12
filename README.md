@@ -1,3 +1,4 @@
+<img width="1920" height="1080" alt="Screenshot 2026-02-11 at 10 03 21 PM" src="https://github.com/user-attachments/assets/aaf9929a-bf62-4dbc-af23-0e45a521ac8c" />
 # Paul's Grand Donut Adventure
 ## Snackathon submission
 
