@@ -1,2 +1,25 @@
 join paul left
-paul (Open): Oh great you're here! I'm about to have a grand donut adventure and I need your help. Sound good?
+[voice path="res://assets/voice/ElevenLabs_OhGoodYoureHere.mp3" volume="0.0"]
+paul (Open): Oh great you're here! I was just about to have a grand donut adventure and need a bit of help with the driving. Think you're up to it?
+update paul (Closed)
+[voice path="res://assets/voice/ElevenLabs_DrivingTheDonut.mp3" volume="0.0"]
+paul (Smile): Fantastic. Driving the donut should be straightforward.
+update paul (Closed)
+[voice path="res://assets/voice/ElevenLabs_UseTheMouse.mp3" volume="0.0"]
+paul (Open): Use the mouse to move the donut car from side to side to collect golden donuts
+[voice path="res://assets/voice/ElevenLabs_DonutTally.mp3" volume="0.0"]
+paul: - all while avoiding the obstacles, which will cause you to lose a donut from the donut tally.
+update paul (Closed)
+[voice path="res://assets/voice/ElevenLabs_Tapping.mp3" volume="0.0"]
+paul (Smile): Tapping the donut button [spacebar] once will do a skip and a hop, while double tapping quickly will grant me a speed boost.
+update paul (Closed)
+[voice path="res://assets/voice/ElevenLabs_HelpMeVisit.mp3" volume="0.0"]
+paul (Smile): Help me visit all the CM offices while collecting as many donuts as you can.
+update paul (Open)
+[voice path="res://assets/voice/ElevenLabs_Otherwise.mp3" volume="0.0"]
+paul (Open): Otherwise, Brendan might not get a donut - and we'll never hear the end of that.
+update paul (Closed)
+[voice path="res://assets/voice/ElevenLabs_LetsGo.mp3" volume="0.0"]
+paul (Smile): Now, as my nan use to say - Let's go!
+update paul (Closed)
+[signal arg="race"]

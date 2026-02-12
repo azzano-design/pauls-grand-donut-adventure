@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dfuc705es7414"]
+[gd_scene load_steps=10 format=3 uid="uid://dfuc705es7414"]
 
 [ext_resource type="Script" uid="uid://dcxon0lr2r7k0" path="res://scripts/main_screen.gd" id="1_7a4el"]
 [ext_resource type="Texture2D" uid="uid://dhgfpfpxay46s" path="res://assets/art/gpt_background.png" id="1_tjn2e"]
@@ -6,8 +6,26 @@
 [ext_resource type="Script" uid="uid://c6va6n2esjqu7" path="res://scripts/main_background_image.gd" id="3_4sclt"]
 [ext_resource type="Texture2D" uid="uid://dslra48jeymwg" path="res://assets/art/gpt_logo.png" id="3_kwhh3"]
 [ext_resource type="Script" uid="uid://cfra16yxv8fdn" path="res://scripts/main_screen_button.gd" id="4_kwhh3"]
+[ext_resource type="Texture2D" uid="uid://dcxdjtttuftrh" path="res://assets/art/gpt_donut_button.png" id="6_ue4rx"]
 
-[node name="Control" type="Control"]
+[sub_resource type="GDScript" id="GDScript_ywh4s"]
+script/source = "extends AudioStreamPlayer2D
+
+@onready var intro_music: AudioStreamPlayer2D = $\".\"
+
+func fade_out_music():
+	var tween = create_tween()
+	tween.tween_property(intro_music, \"volume_db\", -80, 2.0).set_ease(Tween.EASE_IN)
+	tween.tween_callback(intro_music.stop)
+"
+
+[sub_resource type="LabelSettings" id="LabelSettings_ywh4s"]
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 9
+shadow_color = Color(0, 0, 0, 1)
+
+[node name="Intro" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -22,6 +40,7 @@ metadata/_edit_use_anchors_ = true
 [node name="IntroMusic" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_ywh4s")
 autoplay = true
+script = SubResource("GDScript_ywh4s")
 
 [node name="BackgroundImage" type="TextureRect" parent="."]
 layout_mode = 1
@@ -39,6 +58,7 @@ texture = ExtResource("1_tjn2e")
 stretch_mode = 4
 script = ExtResource("3_4sclt")
 dim_color = Color(0.140448, 0.140447, 0.140447, 1)
+normal_color = Color(0.439049, 0.439049, 0.439049, 1)
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 1
@@ -66,11 +86,17 @@ expand_mode = 1
 [node name="Button" type="Button" parent="CenterContainer/VBoxContainer"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
-text = "Start
+action_mode = 0
+button_mask = 0
+text = "START
 "
+icon = ExtResource("6_ue4rx")
+flat = true
 icon_alignment = 1
 script = ExtResource("4_kwhh3")
 
-[node name="TextEdit" type="TextEdit" parent="CenterContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
-text = "[Spacebar to activate Donut]"
+text = "Use [Spacebar] to play"
+label_settings = SubResource("LabelSettings_ywh4s")
+horizontal_alignment = 1

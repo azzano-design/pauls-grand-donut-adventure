@@ -1,0 +1,354 @@
+[gd_scene load_steps=33 format=3 uid="uid://bqt5xm8r8vqhk"]
+
+[ext_resource type="Script" uid="uid://lfy3q0uutmn5" path="res://scripts/player.gd" id="1"]
+[ext_resource type="Script" uid="uid://dq1i0vyf38cqu" path="res://scripts/race.gd" id="1_jy6vs"]
+[ext_resource type="Texture2D" uid="uid://cw61xcf0v3gmr" path="res://assets/art/gpt_skybox.png" id="1_l0hv7"]
+[ext_resource type="Script" uid="uid://dms5pyrujxm1q" path="res://scripts/follow_camera.gd" id="2"]
+[ext_resource type="Script" uid="uid://ctk2gh7ejr6ym" path="res://scripts/track_generator.gd" id="3"]
+[ext_resource type="PackedScene" uid="uid://c7fkggvop7r03" path="res://assets/models/donut/Meshy_AI_a_flying_donut_with_s_0208170619_texture.glb" id="3_dg77c"]
+[ext_resource type="Script" uid="uid://c3jcbin8l5sxd" path="res://scripts/boost_ui.gd" id="4"]
+[ext_resource type="Script" uid="uid://cdpjkhiv6nsfd" path="res://addons/jigglebones/jigglebone.gd" id="4_w48qg"]
+[ext_resource type="Script" uid="uid://bi8duvxhhenmk" path="res://scripts/particle_effects.gd" id="5"]
+[ext_resource type="AudioStream" uid="uid://c6jk20pp27kcl" path="res://assets/music/musicGPT_Speed_Surge.mp3" id="5_efxa6"]
+[ext_resource type="Shader" uid="uid://bthwsjn102srk" path="res://scripts/speed_lines.gdshader" id="6"]
+[ext_resource type="PackedScene" uid="uid://c404x25gdfik8" path="res://scenes/player.tscn" id="7_r6hvi"]
+[ext_resource type="AudioStream" uid="uid://clab3k7udgsrl" path="res://assets/music/musicGPT_Racing_Noise.mp3" id="8_cd6ng"]
+[ext_resource type="Script" uid="uid://ck6fbyny0378v" path="res://scripts/voice_quips.gd" id="9_ut87i"]
+[ext_resource type="Texture2D" uid="uid://bk5fc04sbiihs" path="res://assets/art/gpt_donut_tally.png" id="12_ut87i"]
+[ext_resource type="Script" uid="uid://bl0wb5p1qe1m4" path="res://scripts/tallycount.gd" id="15_kidlu"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_2cqfq"]
+panorama = ExtResource("1_l0hv7")
+
+[sub_resource type="Sky" id="Sky_dg77c"]
+sky_material = SubResource("PanoramaSkyMaterial_2cqfq")
+
+[sub_resource type="Environment" id="Environment_ycdy4"]
+background_mode = 2
+sky = SubResource("Sky_dg77c")
+sky_rotation = Vector3(0, 1.5708, 0)
+tonemap_mode = 2
+glow_enabled = true
+fog_enabled = true
+fog_mode = 1
+fog_light_color = Color(0.385617, 0.72709, 0.972392, 1)
+fog_sun_scatter = 0.05
+fog_density = 1.0
+fog_aerial_perspective = 0.91
+fog_sky_affect = 0.295
+fog_depth_begin = 0.0
+fog_depth_end = 1159.7
+volumetric_fog_albedo = Color(0.500142, 0.837491, 1, 1)
+volumetric_fog_emission = Color(2.02149e-06, 0.576801, 0.801645, 1)
+volumetric_fog_emission_energy = 0.0
+volumetric_fog_anisotropy = 0.9
+volumetric_fog_length = 155.98
+volumetric_fog_detail_spread = 0.68302
+volumetric_fog_ambient_inject = 1.05
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_jy6vs"]
+radius = 1.624
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dg77c"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_Smoke"]
+particle_flag_rotate_y = true
+emission_shape = 1
+emission_sphere_radius = 0.3
+direction = Vector3(0, 1, 0)
+spread = 15.0
+initial_velocity_min = 2.0
+initial_velocity_max = 4.0
+gravity = Vector3(0, 1, 0)
+scale_min = 0.3
+scale_max = 0.6
+
+[sub_resource type="QuadMesh" id="QuadMesh_Smoke"]
+size = Vector2(0.5, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4c57u"]
+albedo_color = Color(1, 1, 0, 1)
+emission_enabled = true
+emission = Color(0.907635, 1, 0.762322, 1)
+emission_energy_multiplier = 11.07
+emission_on_uv2 = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ycdy4"]
+
+[sub_resource type="Animation" id="Animation_vivmo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VehicleMesh:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.5, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("VehicleMesh:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_w48qg"]
+resource_name = "donut_bob"
+length = 0.5
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VehicleMesh:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.233333, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0.5, 0), Vector3(0, 0.1, -0.1), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_2cqfq"]
+resource_name = "spin"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VehicleMesh:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, -12.5664, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2cqfq"]
+_data = {
+&"RESET": SubResource("Animation_vivmo"),
+&"donut_bob": SubResource("Animation_w48qg"),
+&"spin": SubResource("Animation_2cqfq")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_SpeedLines"]
+shader = ExtResource("6")
+shader_parameter/line_count = 30.0
+shader_parameter/speed = 10.0
+shader_parameter/line_width = 0.01
+shader_parameter/line_color = Color(1, 1, 0.8, 0.8)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vivmo"]
+albedo_color = Color(0.247059, 0.470588, 0.278431, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_2cqfq"]
+size = Vector2(2, 900)
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_jy6vs")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ycdy4")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Track" type="Node3D" parent="."]
+script = ExtResource("3")
+track_length = 2500.0
+
+[node name="Player" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+script = ExtResource("1")
+boost_cooldown = 15.0
+max_lateral_distance = 8.0
+
+[node name="LevelMusic" type="AudioStreamPlayer3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+stream = ExtResource("5_efxa6")
+autoplay = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("SphereShape3D_jy6vs")
+
+[node name="VehicleMesh" type="MeshInstance3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="Donut" parent="Player/VehicleMesh" instance=ExtResource("3_dg77c")]
+transform = Transform3D(-1.5, 1.31054e-07, 4.57649e-09, 0, 0.052349, -1.49909, -1.31134e-07, -1.49909, -0.052349, 0.00311909, 0.140983, 0.00873345)
+
+[node name="Player" parent="Player/VehicleMesh" instance=ExtResource("7_r6hvi")]
+transform = Transform3D(-2, 0, -3.01992e-07, 0, 2, 0, 3.01992e-07, 0, -2, 0, 0.0603724, 5.58132)
+
+[node name="JiggleboneLeft" type="Node3D" parent="Player/VehicleMesh/Player/mixamo-player/Armature/Skeleton3D" index="5"]
+transform = Transform3D(0.0197886, -0.000739505, -0.00280512, -0.00289061, -0.00339495, -0.0194969, 0.000244739, 0.0196959, -0.00346597, -0.151255, 3.77092, 3.46714)
+top_level = true
+script = ExtResource("4_w48qg")
+bone_name = "mixamorig12_LeftUpLeg"
+stiffness = 0.5
+metadata/_custom_type_script = "uid://cdpjkhiv6nsfd"
+
+[node name="JiggleboneRight" type="Node3D" parent="Player/VehicleMesh/Player/mixamo-player/Armature/Skeleton3D" index="6"]
+transform = Transform3D(0.0199642, 0.00119645, 6.57636e-05, 0.000284161, -0.00366088, -0.0196602, -0.00116408, 0.0196257, -0.00367134, 0.241137, 3.75668, 3.46012)
+top_level = true
+script = ExtResource("4_w48qg")
+bone_name = "mixamorig12_RightUpLeg"
+stiffness = 0.5
+metadata/_custom_type_script = "uid://cdpjkhiv6nsfd"
+
+[node name="GroundRay" type="RayCast3D" parent="Player"]
+target_position = Vector3(0, -2, 0)
+
+[node name="ParticleEffects" type="Node3D" parent="Player" node_paths=PackedStringArray("player")]
+script = ExtResource("5")
+player = NodePath("..")
+
+[node name="DriftSmokeLeft" type="GPUParticles3D" parent="Player/ParticleEffects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.42921, 0, 0)
+material_override = SubResource("StandardMaterial3D_dg77c")
+emitting = false
+amount = 20
+lifetime = 0.8
+trail_lifetime = 0.02
+process_material = SubResource("ParticleProcessMaterial_Smoke")
+draw_pass_1 = SubResource("QuadMesh_Smoke")
+
+[node name="Boost" type="GPUParticles3D" parent="Player/ParticleEffects"]
+transform = Transform3D(1, 0, 0, 0, -0.123272, -0.992373, 0, 0.992373, -0.123272, -0.127814, 0, 1.26991)
+material_override = SubResource("StandardMaterial3D_4c57u")
+amount = 200
+lifetime = 7.35
+speed_scale = 2.29
+trail_lifetime = 0.02
+process_material = SubResource("ParticleProcessMaterial_Smoke")
+draw_pass_1 = SubResource("QuadMesh_Smoke")
+
+[node name="DriftSmokeRight" type="GPUParticles3D" parent="Player/ParticleEffects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.35134, 0, 0)
+material_override = SubResource("StandardMaterial3D_ycdy4")
+emitting = false
+amount = 20
+lifetime = 0.8
+trail_lifetime = 0.02
+process_material = SubResource("ParticleProcessMaterial_Smoke")
+draw_pass_1 = SubResource("QuadMesh_Smoke")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
+libraries = {
+&"": SubResource("AnimationLibrary_2cqfq")
+}
+
+[node name="BoostNoise" type="AudioStreamPlayer" parent="Player"]
+stream = ExtResource("8_cd6ng")
+
+[node name="VoiceQuips" type="Node" parent="Player"]
+script = ExtResource("9_ut87i")
+
+[node name="VoicePlayer" type="AudioStreamPlayer" parent="Player"]
+
+[node name="Timer" type="Timer" parent="Player"]
+wait_time = 12.0
+autostart = true
+
+[node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("target", "player")]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 7.10658, 7.56069)
+script = ExtResource("2")
+target = NodePath("../Player")
+player = NodePath("../Player")
+
+[node name="SpeedLines" type="ColorRect" parent="Camera3D"]
+material = SubResource("ShaderMaterial_SpeedLines")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="BoostUI" type="Control" parent="." node_paths=PackedStringArray("player")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 922.5
+offset_bottom = 274.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("4")
+player = NodePath("../Player")
+
+[node name="MarginContainer" type="MarginContainer" parent="BoostUI"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = -49.0
+offset_bottom = 85.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BoostUI/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="BoostStatusLabel" type="Label" parent="BoostUI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "Boost Ready! (Double-tap Space)"
+
+[node name="BoostBar" type="ProgressBar" parent="BoostUI/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(300, 30)
+layout_mode = 2
+value = 100.0
+show_percentage = false
+
+[node name="CooldownBar" type="ProgressBar" parent="BoostUI/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(300, 30)
+layout_mode = 2
+show_percentage = false
+
+[node name="DonutTally" type="Sprite2D" parent="."]
+position = Vector2(1785, 59)
+scale = Vector2(0.473404, 0.473404)
+texture = ExtResource("12_ut87i")
+
+[node name="Count" type="Label" parent="DonutTally"]
+offset_left = -70.0
+offset_top = -84.0
+offset_right = 180.0
+offset_bottom = 84.0
+theme_override_font_sizes/font_size = 100
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("15_kidlu")
+
+[node name="Boost-icon" type="Sprite2D" parent="."]
+position = Vector2(909, 851)
+scale = Vector2(0.224458, 0.224458)
+
+[node name="Ground" type="MeshInstance3D" parent="."]
+transform = Transform3D(1200, 0, 0, 0, 5000, 0, 0, 0, -251866, 0, -34.3767, -1196.19)
+material_override = SubResource("StandardMaterial3D_vivmo")
+mesh = SubResource("PlaneMesh_2cqfq")
+
+[connection signal="timeout" from="Player/Timer" to="Player" method="_on_timer_timeout"]
+
+[editable path="Player/VehicleMesh/Player"]
+[editable path="Player/VehicleMesh/Player/mixamo-player"]

@@ -1,0 +1,5 @@
+join paul (Smile) left
+[voice path="res://assets/voice/ElevenLabs_DonutsDelivered.mp3" volume="0.0"]
+paul (Open): Donuts delivered. I couldn't have done it without your impressive driving. Now with that out of the way, I guess it's time to get back to work.
+update paul (Closed)
+[signal arg="credits"]

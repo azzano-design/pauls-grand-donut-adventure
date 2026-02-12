@@ -1,7 +1,7 @@
 extends TextureRect
 
 @export var dim_color: Color = Color(0.15, 0.15, 0.15, 1.0)
-@export var normal_color: Color = Color(1.0, 1.0, 1.0, 1.0)
+@export var normal_color: Color = Color(0.5, 0.5, 0.5, 1.0)
 @export var transition_duration: float = 2.0
 
 func _ready():

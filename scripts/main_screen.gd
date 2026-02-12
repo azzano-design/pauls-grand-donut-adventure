@@ -1,12 +1,14 @@
 extends Control
 
 @onready var background: TextureRect = $BackgroundImage
-@onready var ui_container: VBoxContainer = $CenterContainer/VBoxContainer
-@onready var button: Button = $CenterContainer/VBoxContainer/Button
-
 @export var transition_duration: float = 2.0
+@onready var button: Button = $CenterContainer/VBoxContainer/Button
+@onready var center_container: CenterContainer = $CenterContainer
+
+const RACE = preload("res://scenes/race.tscn")
 
 func _ready():
+	Dialogic.signal_event.connect(_on_dialogic_signal)
 	button.pressed.connect(_on_button_pressed)
 	
 	# Make the Control node fill the entire viewport
@@ -39,4 +41,15 @@ func _on_button_pressed():
 	
 	# Fade out entire UI container (logo and button together)
 	var tween = create_tween()
-	tween.tween_property(ui_container, "modulate:a", 0.0, transition_duration)
+	tween.tween_property(center_container, "modulate:a", 0.0, transition_duration)
+	
+	await tween.finished
+	button.queue_free()
+	Dialogic.start("intro")
+
+
+
+func _on_dialogic_signal(argument: String):
+	if argument == "race":
+		print("Start the race!")
+		get_tree().call_deferred("change_scene_to_packed", RACE)

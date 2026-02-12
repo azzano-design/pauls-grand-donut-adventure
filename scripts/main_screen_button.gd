@@ -2,6 +2,11 @@ extends Button
 @onready var background_image: TextureRect = $"../../../BackgroundImage"
 
 func _ready():
+	mouse_filter = MOUSE_FILTER_IGNORE  # Disables mouse clicks
+	# Create an empty stylebox for focus
+	var empty_style = StyleBoxEmpty.new()
+	add_theme_stylebox_override("focus", empty_style)
+	grab_focus()
 	pressed.connect(_on_button_pressed)
 	
 	# Make the button circular by setting equal dimensions
@@ -17,3 +22,8 @@ func _on_button_pressed():
 	var background = background_image  # Adjust path as needed
 	if background and background.has_method("brighten"):
 		background.brighten()
+
+
+func _gui_input(event):
+	if event.is_action_pressed("Donut") and has_focus():
+		pressed.emit()

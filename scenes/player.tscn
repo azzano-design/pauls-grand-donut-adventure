@@ -12,8 +12,7 @@ roughness = 0.7
 albedo_color = Color(0, 0, 0, 1)
 
 [node name="Player" type="Node3D"]
-
-[node name="VoiceQuips" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(-1.025, 0, -8.96083e-08, 0, 1.025, 0, 8.96083e-08, 0, -1.025, 0, 0, 0)
 
 [node name="mixamo-player" parent="." instance=ExtResource("1_3vyb7")]
 transform = Transform3D(1, 0, 0, 0, 0.0896245, -0.995976, 0, 0.995976, 0.0896245, 0, 0, 0)

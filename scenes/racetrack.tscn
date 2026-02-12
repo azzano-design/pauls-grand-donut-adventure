@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bksqavnxv0b1a"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_yo124"]
+size = Vector3(20, 0.1, 20)
+
+[node name="Racetrack" type="Node3D"]
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="."]
+mesh = SubResource("BoxMesh_yo124")
