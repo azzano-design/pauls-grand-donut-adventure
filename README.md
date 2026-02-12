@@ -30,5 +30,8 @@ Claude
 Video:
 Google Gemini
 
+3D Models:
+MeshyAI, Mixamo
+
 Plugins used: 
 Dialogic, JiggleBones
