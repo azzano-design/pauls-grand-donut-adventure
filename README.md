@@ -3,9 +3,9 @@
 # Paul's Grand Donut Adventure
 ## Snackathon submission
 
-The prompt was to create something (anything) with one button only.
+The prompt was to create something (anything) with one button only - and to use and learn new AI tools along the way.
 
-Here is a fun game you can play using on the spacebar (and mouse movement - but that's not a button now is it?).
+Here is a fun game you can play using only the spacebar (and mouse movement - but that's not a button now is it?).
 
 Created with Godot and a slew of AI tools. Full credits below.
 
